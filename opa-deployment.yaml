@@ -21,7 +21,8 @@ spec:
         - "--server"
         - "--config-file=/config/config.yaml"
         - "--log-level=info"
-        - "/policies/policy.rego"
+        - "--bundle"
+        - "/policies"
         ports:
         - containerPort: 8181
         - containerPort: 9191
