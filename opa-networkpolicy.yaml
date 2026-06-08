@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-productpage-to-opa
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      app: opa
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: productpage
+    ports:
+    - port: 9191
+      protocol: TCP
