@@ -21,16 +21,22 @@ spec:
         - "--server"
         - "--config-file=/config/config.yaml"
         - "--log-level=info"
+        - "/policies/policy.rego"
         ports:
         - containerPort: 8181
         - containerPort: 9191
         volumeMounts:
         - name: opa-config
           mountPath: /config
+        - name: opa-policies
+          mountPath: /policies
       volumes:
       - name: opa-config
         configMap:
           name: opa-config
+      - name: opa-policies
+        configMap:
+          name: opa-policies
 ---
 apiVersion: v1
 kind: Service
