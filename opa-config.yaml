@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: opa-config
+  namespace: default
+data:
+  config.yaml: |
+    bundles:
+      gitops:
+        resource: "/v1/data"
+        polling:
+          min_delay_seconds: 10
+          max_delay_seconds: 20
+    plugins:
+      envoy_ext_authz_grpc:
+        addr: ":9191"
+        path: istio/authz/allow
