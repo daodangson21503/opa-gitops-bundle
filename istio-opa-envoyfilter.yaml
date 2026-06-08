@@ -21,8 +21,10 @@ spec:
         name: envoy.filters.http.ext_authz
         typed_config:
           "@type": type.googleapis.com/envoy.extensions.filters.http.ext_authz.v3.ExtAuthz
-          grpc_service:
-            envoy_grpc:
-              cluster_name: outbound|9191||opa.default.svc.cluster.local
-            timeout: 5s
+          http_service:
+            server_uri:
+              uri: http://opa.default.svc.cluster.local:8181
+              cluster: outbound|8181||opa.default.svc.cluster.local
+              timeout: 5s
+            path_prefix: /v1/data/istio/authz/allow
           failure_mode_allow: false
